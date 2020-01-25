@@ -3,33 +3,33 @@ services:
   - docker
 
 before_install:
-  - docker build -t stephengrider/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t adamjmeyer/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run stephengrider/react-test npm test -- --coverage
+  - docker run adamjmeyer/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t stephengrider/multi-client ./client
-  - docker build -t stephengrider/multi-nginx ./nginx
-  - docker build -t stephengrider/multi-server ./server
-  - docker build -t stephengrider/multi-worker ./worker
+  - docker build -t adamjmeyer/multi-client ./client
+  - docker build -t adamjmeyer/multi-nginx ./nginx
+  - docker build -t adamjmeyer/multi-server ./server
+  - docker build -t adamjmeyer/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push stephengrider/multi-client
-  - docker push stephengrider/multi-nginx
-  - docker push stephengrider/multi-server
-  - docker push stephengrider/multi-worker
+  - docker push meyeradamj/multi-client
+  - docker push meyeradamj/multi-nginx
+  - docker push meyeradamj/multi-server
+  - docker push meyeradamj/multi-worker
 
 deploy:
+  edge: true # missing bucket_name error
   provider: elasticbeanstalk
-  region: us-west-1
-  app: multi-docker
-  env: MultiDocker-env
-  bucket_name: elasticbeanstalk-us-west-1-306476627547
-  bucket_path: docker-multi
+  region: "us-east-2"
+  app: "udemy-docker-complex"
+  env: "UdemyDockerComplex-env"
+  bucket_name: "elasticbeanstalk-us-east-2-399713599643"
+  bucket_path: "udemy-docker-complex"
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
+  secret_access_key: $AWS_SECRET_KEY
