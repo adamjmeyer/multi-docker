@@ -16,10 +16,10 @@ after_success:
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push meyeradamj/multi-client
-  - docker push meyeradamj/multi-nginx
-  - docker push meyeradamj/multi-server
-  - docker push meyeradamj/multi-worker
+  - docker push meyeradamj/onions:multi-client
+  - docker push meyeradamj/onions:multi-nginx
+  - docker push meyeradamj/onions:multi-server
+  - docker push meyeradamj/onions:multi-worker
 
 deploy:
   edge: true # missing bucket_name error
