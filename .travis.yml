@@ -25,8 +25,8 @@ deploy:
   edge: true # missing bucket_name error
   provider: elasticbeanstalk
   region: "us-east-2"
-  app: "udemy-docker-complex"
-  env: "UdemyDockerComplex-env"
+  app: "multi-docker"
+  env: "MultiDocker-env"
   bucket_name: "elasticbeanstalk-us-east-2-399713599643"
   bucket_path: "udemy-docker-complex"
   on:
